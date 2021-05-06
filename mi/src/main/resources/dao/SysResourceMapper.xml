@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.admin.mapper.SysResourceMapper">
+
+    <select id="getResByAdminId" resultType="com.example.mall.admin.entity.SysResource">
+        SELECT res.* from
+            sys_admin_role_relation ar
+                left JOIN sys_role r ON ar.role_id=r.id
+                LEFT JOIN sys_role_resource_relation rr on rr.role_id=r.id
+                LEFT JOIN sys_resource res on res.id=rr.resource_id
+        WHERE ar.admin_id=#{adminid}
+    </select>
+</mapper>

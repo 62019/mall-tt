@@ -1,0 +1,37 @@
+server:
+  port: 8080
+  max-http-header-size: 102400
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:
+    username:
+    password: @
+    hikari:
+      max-lifetime: 500000
+
+
+  security:
+    user:
+      name: root
+      password: root
+
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:dao/*.xml
+  type-aliases-package:
+
+#mybatis:
+#  mapper-locations:
+#    - classpath:dao/*.xml
+#    - classpath*:com/**/mapper/*.xml

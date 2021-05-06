@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.portal.mapper.PmsProductPortalMapper">
+
+    <select id="search" resultType="com.example.mall.portal.entity.PmsProductPortalEntity">
+        SELECT * FROM pms_product
+        where id>0
+        <if test="keyword != null">
+            and  name like concat('%',#{keyword},'%') ;
+        </if>
+        <if test="cid != null">
+            and  product_category_id=#{cid};
+        </if>
+        <if test="bid != null">
+            and  brandId=#{bid};
+        </if>
+    </select>
+</mapper>

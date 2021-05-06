@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.admin.mapper.PmsProductCategoryMapper">
+
+
+    <resultMap id="r1" type="com.example.mall.admin.vo.PmsProductCategoryVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <collection property="child" ofType="com.example.mall.admin.entity.PmsProductCategory">
+            <id column="id2" property="id" jdbcType="INTEGER"/>
+            <result column="name2" property="name" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <select id="TreeList" resultMap="r1">
+        SELECT c1.*,
+               c2.id id2,c2.`name` name2
+        from pms_product_category c1
+                 LEFT JOIN pms_product_category c2 on c2.parent_id=c1.id
+        where c1.`level`=0
+    </select>
+</mapper>
